@@ -1,5 +1,11 @@
 class App {
 
+  data = [
+    { element: 'together', date: '20040322' },
+    { element: 'married', date: '20040322' },
+    { element: 'son-age', date: '20180311' }
+  ]
+
   constructor() {
     this.calculate()
   }
