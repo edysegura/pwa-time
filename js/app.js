@@ -1,9 +1,9 @@
 class App {
 
   data = [
-    { element: 'together', date: '20040322' },
-    { element: 'married', date: '20040322' },
-    { element: 'son-age', date: '20180311' }
+    { elementId: 'together', startDate: '20040322' },
+    { elementId: 'married', startDate: '20040322' },
+    { elementId: 'son-age', startDate: '20180311' }
   ]
 
   constructor() {
@@ -11,15 +11,13 @@ class App {
   }
 
   calculate() {
-    const togetherElement = document.getElementById('together')
-    const marriedElement = document.getElementById('married')
-    const sonAgeElement = document.getElementById('son-age')
+    this.data.forEach(this.howLongFromNow)
+  }
+
+  howLongFromNow(item) {
+    const element = document.getElementById(item.elementId)
     const removeSufix = true
-
-    togetherElement.textContent = moment('20040322').fromNow(removeSufix)
-    marriedElement.textContent = moment('20080612').fromNow(removeSufix)
-    sonAgeElement.textContent = moment('20180311').fromNow(removeSufix)
-
+    element.textContent = moment(item.startDate).fromNow(removeSufix)
   }
 }
 
