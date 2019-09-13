@@ -2,7 +2,7 @@ class App {
 
   data = [
     { elementId: 'together', startDate: '20040322' },
-    { elementId: 'married', startDate: '20040322' },
+    { elementId: 'married', startDate: '20080712' },
     { elementId: 'son-age', startDate: '20180311' }
   ]
 
