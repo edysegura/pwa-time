@@ -8,10 +8,15 @@ class App {
 
   constructor() {
     this.calculate()
+    this.installCache()
   }
 
   calculate() {
     this.data.forEach(this.howLongFromNow)
+  }
+
+  installCache() {
+    console.log('Registy cache.js')
   }
 
   howLongFromNow(item) {
