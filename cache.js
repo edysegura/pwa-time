@@ -4,7 +4,7 @@ const assets = [
   './',
   './index.html',
   './js/libs/moment.min.js',
-  './js/index.js'
+  './js/app.js'
 ]
 
 async function precache() {
