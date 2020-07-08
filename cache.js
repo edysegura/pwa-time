@@ -7,6 +7,18 @@ const assets = [
   './js/app.js'
 ]
 
+function removeOldCache(key) {
+  if (key !== cacheName) {
+    console.log('Removing old cache')
+    return caches.delete(key)
+  }
+}
+
+async function cacheCleanup() {
+  const keyList = await caches.keys()
+  return Promise.all(keyList.map(removeOldCache))
+}
+
 async function cacheStaticAssets() {
   const cache = await caches.open(cacheName)
   return cache.addAll(assets)
@@ -38,6 +50,12 @@ async function fetchFromCache(request) {
 
 self.addEventListener('install', event => {
   event.waitUntil(cacheStaticAssets())
+})
+
+self.addEventListener('activate', event => {
+  console.log('Activating service worker...', event)
+  event.waitUntil(cacheCleanup())
+  return self.clients.claim()
 })
 
 self.addEventListener('fetch', event => {
