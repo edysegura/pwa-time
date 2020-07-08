@@ -7,7 +7,7 @@ const assets = [
   './js/app.js'
 ]
 
-async function precache() {
+async function cacheStaticAssets() {
   const cache = await caches.open(cacheName)
   return cache.addAll(assets)
 }
@@ -37,7 +37,7 @@ async function fetchFromCache(request) {
 }
 
 self.addEventListener('install', event => {
-  event.waitUntil(precache().then(() => self.skipWaiting()))
+  event.waitUntil(cacheStaticAssets())
 })
 
 self.addEventListener('fetch', event => {
