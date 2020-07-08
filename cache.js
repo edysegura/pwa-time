@@ -12,7 +12,7 @@ async function precache() {
   return cache.addAll(assets)
 }
 
-async function doCache(request) {
+async function fetchFromNetwork(request) {
   console.log('Fetching and adding the response data into cache')
 
   const cache = await caches.open(cacheName)
@@ -24,16 +24,16 @@ async function doCache(request) {
   return response
 }
 
-async function fetchFromCacheWhenAvailable(request) {
+async function fetchFromCache(request) {
   const cache = await caches.open(cacheName)
-  const match = await cache.match(request)
+  const cachedResponse = await cache.match(request)
 
-  if (match) {
+  if (cachedResponse) {
     console.log('Returning from cache')
-    return match
+    return cachedResponse
   }
 
-  return doCache(request)
+  return fetchFromNetwork(request)
 }
 
 self.addEventListener('install', event => {
@@ -41,5 +41,5 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('fetch', event => {
-  event.respondWith(fetchFromCacheWhenAvailable(event.request))
+  event.respondWith(fetchFromCache(event.request))
 })
