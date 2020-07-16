@@ -3,6 +3,7 @@ const cacheName = 'static-assets-v1'
 const assetsToCache = [
   './',
   './index.html',
+  './css/style.css',
   './js/libs/moment.min.js',
   './js/app.js'
 ]
