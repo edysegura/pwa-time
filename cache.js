@@ -1,6 +1,6 @@
-const cacheName = 'v1'
+const cacheName = 'static-assets-v1'
 
-const assets = [
+const assetsToCache = [
   './',
   './index.html',
   './js/libs/moment.min.js',
@@ -21,7 +21,7 @@ async function cacheCleanup() {
 
 async function cacheStaticAssets() {
   const cache = await caches.open(cacheName)
-  return cache.addAll(assets)
+  return cache.addAll(assetsToCache)
 }
 
 async function fetchFromNetwork(request) {
@@ -50,6 +50,7 @@ async function fetchFromCache(request) {
 
 self.addEventListener('install', event => {
   event.waitUntil(cacheStaticAssets())
+  self.skipWaiting()
 })
 
 self.addEventListener('activate', event => {
