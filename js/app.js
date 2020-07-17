@@ -19,8 +19,8 @@ class App {
     if ('serviceWorker' in navigator) {
       console.log('Installing cache...')
 
-      const success = () => console.log('Cache has been installed')
-      const failure = error => console.log('Cache installation failed', error)
+      const success = () => console.log('[Service Worker] Cache has been installed')
+      const failure = error => console.log('[Service Worker] Cache installation failed', error)
 
       navigator.serviceWorker
         .register('./cache.js')

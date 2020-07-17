@@ -1,16 +1,18 @@
-const cacheName = 'static-assets-v1'
+const STATIC_CACHE_NAME = 'static-cache-v4'
 
 const assetsToCache = [
   './',
   './index.html',
+  './favicon.ico',
   './css/style.css',
   './js/libs/moment.min.js',
-  './js/app.js'
+  './js/app.js',
+  'https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic'
 ]
 
 function removeOldCache(key) {
-  if (key !== cacheName) {
-    console.log('Removing old cache')
+  if (key !== STATIC_CACHE_NAME) {
+    console.log(`[Service Worker] Removing old cache: ${key}`)
     return caches.delete(key)
   }
 }
@@ -21,28 +23,21 @@ async function cacheCleanup() {
 }
 
 async function cacheStaticAssets() {
-  const cache = await caches.open(cacheName)
+  const cache = await caches.open(STATIC_CACHE_NAME)
   return cache.addAll(assetsToCache)
 }
 
 async function fetchFromNetwork(request) {
-  console.log('Fetching and adding the response data into cache')
-
-  const cache = await caches.open(cacheName)
-  const requestCloned = request.clone()
-  const response = await fetch(requestCloned)
-
-  cache.put(request, response.clone())
-
-  return response
+  console.log('[Service Worker] Fetching from network')
+  return await fetch(request)
 }
 
 async function fetchFromCache(request) {
-  const cache = await caches.open(cacheName)
+  const cache = await caches.open(STATIC_CACHE_NAME)
   const cachedResponse = await cache.match(request)
 
   if (cachedResponse) {
-    console.log('Returning from cache')
+    console.log('[Service Worker] Fetching from cache')
     return cachedResponse
   }
 
@@ -50,14 +45,15 @@ async function fetchFromCache(request) {
 }
 
 self.addEventListener('install', event => {
+  console.log('[Service Worker] Installing service worker...', event)
   event.waitUntil(cacheStaticAssets())
   self.skipWaiting()
 })
 
 self.addEventListener('activate', event => {
-  console.log('Activating service worker...', event)
+  console.log('[Service Worker] Activating service worker...', event)
   event.waitUntil(cacheCleanup())
-  return self.clients.claim()
+  self.clients.claim()
 })
 
 self.addEventListener('fetch', event => {
