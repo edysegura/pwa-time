@@ -5,19 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="A progressive web to show how long it has been passed">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic'
     rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
   <title>How Long?</title>
 </head>
 
 <body>
-  <!-- <p>
-    We've been together <span id="together">0</span>,
-    married <span id="married">0</span> and we have a son
-    <span id="son-age"></span> old!
-  </p> -->
-
   <ul class="timeline">
     <li>
       <div class="direction-r">
@@ -25,7 +22,7 @@
           <span class="flag">Our God's Gift</span>
           <span class="time-wrapper"><span class="time">2018-03-11</span></span>
         </div>
-        <div class="desc">Our son has been born</div>
+        <div class="desc">Our son has been born and now he is <span id="son-age">0</span> old!</div>
       </div>
     </li>
     <li>
@@ -34,7 +31,7 @@
           <span class="flag">Wedding</span>
           <span class="time-wrapper"><span class="time">2008-07-12</span></span>
         </div>
-        <div class="desc">Really Together</div>
+        <div class="desc">It has been <span id="married">0</span> that we said yes!</div>
       </div>
     </li>
     <li>
@@ -43,7 +40,7 @@
           <span class="flag">First Kiss</span>
           <span class="time-wrapper"><span class="time">2004-03-22</span></span>
         </div>
-        <div class="desc">Since the first kiss we've been together</div>
+        <div class="desc">We've been together <span id="together">0</span> since the first kiss</div>
       </div>
     </li>
   </ul>
@@ -51,5 +48,4 @@
   <script src="js/libs/moment.min.js"></script>
   <script src="js/app.js"></script>
 </body>
-
 </html>
