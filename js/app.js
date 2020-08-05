@@ -2,15 +2,18 @@
 
 class App {
 
-  data = [
-    { elementId: 'together', startDate: '20040322' },
-    { elementId: 'married', startDate: '20080712' },
-    { elementId: 'son-age', startDate: '20180311' }
-  ]
-
   constructor() {
+    this.fillTimeline()
     this.calculate()
     this.installCache()
+  }
+
+  fillTimeline() {
+    this.data = [
+      { elementId: 'together', startDate: '20040322' },
+      { elementId: 'married', startDate: '20080712' },
+      { elementId: 'son-age', startDate: '20180311' }
+    ]
   }
 
   calculate() {
@@ -33,8 +36,8 @@ class App {
 
   howLongFromNow(item) {
     const element = document.getElementById(item.elementId)
-    const removeSufix = true
-    element.textContent = moment(item.startDate).fromNow(removeSufix)
+    const removeSuffix = true
+    element.textContent = moment(item.startDate).fromNow(removeSuffix)
   }
 }
 
